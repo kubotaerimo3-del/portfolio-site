@@ -5,8 +5,6 @@ import { useEffect, useRef } from "react";
 
 import Header from "./components/Header";
 import SectionTitle from "./components/SectionTitle";
-import PrimaryButton from "./components/PrimaryButton";
-import SecondaryButton from "./components/SecondaryButton";
 import WorkCard from "./components/WorkCard";
 import PinkPillButton from "./components/PinkPillButton";
 import GreenButton from "./components/GreenButton";

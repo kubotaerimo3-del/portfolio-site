@@ -2,6 +2,7 @@
 "use client";
 
 import { useLayoutEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const navItems = [
   { id: "home", label: "ホーム" },
@@ -44,10 +45,19 @@ const getActiveSection = (scrollY: number): NavId => {
   return closestId;
 };
 
-export default function Header() {
+type HeaderProps = {
+  currentSection?: NavId;
+  enableSectionTracking?: boolean;
+};
+
+export default function Header({
+  currentSection = "home",
+  enableSectionTracking = true,
+}: HeaderProps) {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<NavId>("home");
+  const [activeSection, setActiveSection] = useState<NavId>(currentSection);
 
   // ★ ユーザーが一度でもスクロールしたかどうか
   const [hasUserScrolled, setHasUserScrolled] = useState(false);
@@ -59,7 +69,10 @@ export default function Header() {
       const scrollY = window.scrollY;
 
       setIsScrolled(scrollY > 10);
-      setActiveSection(getActiveSection(scrollY));
+
+      if (enableSectionTracking) {
+        setActiveSection(getActiveSection(scrollY));
+      }
 
       // 初回（マウント直後）の handleScroll 呼び出しでは
       // 「ユーザーがスクロールした」とみなさない
@@ -74,7 +87,7 @@ export default function Header() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [enableSectionTracking]);
 
   // ✅ ヘッダー全体のトランジションは「ユーザーがスクロールしてから」有効化
   const headerTransitionClass = hasUserScrolled
@@ -118,6 +131,18 @@ export default function Header() {
     setActiveSection(id);
     setIsMenuOpen(false);
 
+    if (!enableSectionTracking) {
+      const destinations: Record<NavId, string> = {
+        home: "/",
+        about: "/about",
+        works: "/works",
+        contact: "/#contact",
+      };
+
+      router.push(destinations[id]);
+      return;
+    }
+    
     const el = document.getElementById(id);
     if (!el) return;
 

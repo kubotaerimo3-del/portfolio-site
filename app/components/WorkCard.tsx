@@ -43,19 +43,18 @@ export default function WorkCard({
         active:translate-y-0 active:shadow-lg
       "
     >
-<img 
-  src={imageSrc}
-  alt={title}
-  className="
-    w-full
-    rounded-xl shadow-md object-cover
+      <img
+        src={imageSrc}
+        alt={imageAlt}
+        className="
+          w-full
+          rounded-xl shadow-md object-cover
 
-    /* 📱 SP時のみ画像縮小 */
-    max-w-[75%] mx-auto sm:max-w-full
-    transition-all duration-300
-  "
-/>
-
+          /* 📱 SP時のみ画像縮小 */
+          max-w-[75%] mx-auto sm:max-w-full
+          transition-all duration-300
+        "
+      />
 
       <h3 className="text-sm font-semibold mb-1 text-slate-900">{title}</h3>
       <p className="text-xs text-slate-600 leading-relaxed mb-3">

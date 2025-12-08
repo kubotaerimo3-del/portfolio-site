@@ -3,7 +3,11 @@
 
 import { useState, useEffect } from "react";
 
+import Link from "next/link";
 import BackToTopButton from "../components/BackToTopButton";
+import Header from "../components/Header";
+import SectionTitle from "../components/SectionTitle";
+import ContactCTA from "../components/ContactCTA";
 
 type BannerWork = {
   type: "banner"; // A案
@@ -221,37 +225,41 @@ export default function WorksPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900">
-      <div className="max-w-5xl mx-auto px-4 py-16 md:py-20">
-        {/* タイトル部分 */}
-        <header className="mb-10 md:mb-14">
-          <p className="text-xs md:text-sm text-slate-500 mb-2">Works</p>
-          <h1 className="text-2xl md:text-3xl font-bold mb-3">
-            デザインしたもの
-          </h1>
-          <p className="text-sm md:text-base text-slate-600">
-            バナー・LP・名刺など、用途に合わせてさまざまなデザインを制作しています。
-            各作品では、ターゲットや目的に合わせてレイアウトや色を工夫しています。
-          </p>
-        </header>
+    <main className="min-h-screen bg-[#fff6f8] text-slate-900">
+      <Header currentSection="works" enableSectionTracking={false} />
+      <div className="max-w-5xl mx-auto px-4 py-12 md:py-16 space-y-12 md:space-y-16">
+        <SectionTitle>デザインしたもの</SectionTitle>
 
-        {/* 各作品ブロック */}
-        <div className="space-y-16 md:space-y-20">
-          {works.map((work, index) => (
-            <section
-              key={work.id}
-              id={work.id}
-              className={`
-                bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8
-                ${index !== 0 ? "mt-16 pt-16 border-t-4 border-dashed border-slate-200" : ""}
-              `}
-            >
-              {/* タイトル */}
-              <h2 className="text-lg md:text-xl font-bold mb-6">
-                {work.title}
-              </h2>
+        <div className="bg-white rounded-3xl shadow-sm border border-slate-100 px-6 py-8 md:px-10 md:py-12">
+          {/* タイトル部分 */}
+          <header className="mb-10 md:mb-12 text-center md:text-left space-y-3">
+            <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ffdef8] text-xs font-semibold text-slate-800">
+              Works
+            </p>
+            <h1 className="text-2xl md:text-3xl font-bold">デザインしたもの</h1>
+            <p className="text-sm md:text-base text-slate-700 leading-relaxed">
+              バナー・LP・名刺など、用途に合わせてさまざまなデザインを制作しています。
+              目的やターゲットに合わせてレイアウトや色を設計し、「伝わる」ビジュアルに仕上げました。
+            </p>
+          </header>
 
-              <div className="grid md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-6 md:gap-10 items-start">
+          {/* 各作品ブロック */}
+          <div className="space-y-14 md:space-y-16">
+            {works.map((work, index) => (
+              <section
+                key={work.id}
+                id={work.id}
+                className={`
+                  rounded-2xl bg-[#fffbfe] border border-[#f3d5eb] p-6 md:p-8 shadow-[0_16px_50px_rgba(0,0,0,0.06)]
+                  ${index !== 0 ? "mt-6" : ""}
+                `}
+              >
+                {/* タイトル */}
+                <h2 className="text-lg md:text-xl font-bold mb-6 text-slate-900">
+                  {work.title}
+                </h2>
+
+                <div className="grid md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-6 md:gap-10 items-start">
 
                   {/* 画像エリア */}
                   <div className="space-y-4">
@@ -263,7 +271,7 @@ export default function WorksPage() {
                             key={src}
                             type="button"
                             onClick={() => openImage(src, "normal")}
-                            className="rounded-2xl overflow-hidden bg-slate-50 flex items-center justify-center cursor-zoom-in hover:opacity-90 transition"
+                            className="rounded-2xl overflow-hidden bg-white flex items-center justify-center cursor-zoom-in hover:opacity-90 transition shadow-sm"
                           >
                             <img
                               src={src}
@@ -317,7 +325,7 @@ export default function WorksPage() {
                         <button
                           type="button"
                           onClick={() => openImage(work.front, "normal")}
-                          className="rounded-2xl overflow-hidden bg-slate-50 flex items-center justify-center cursor-zoom-in hover:opacity-90 transition"
+                          className="rounded-2xl overflow-hidden bg-white flex items-center justify-center cursor-zoom-in hover:opacity-90 transition shadow-sm"
                         >
                           <img
                             src={work.front}
@@ -328,7 +336,7 @@ export default function WorksPage() {
                         <button
                           type="button"
                           onClick={() => openImage(work.back, "normal")}
-                          className="rounded-2xl overflow-hidden bg-slate-50 flex items-center justify-center cursor-zoom-in hover:opacity-90 transition"
+                          className="rounded-2xl overflow-hidden bg-white flex items-center justify-center cursor-zoom-in hover:opacity-90 transition shadow-sm"
                         >
                           <img
                             src={work.back}
@@ -380,7 +388,7 @@ export default function WorksPage() {
                     </p>
 
                     <div className="pt-2">
-                      <a
+                      <Link
                         href="/#works"
                         className="inline-flex items-center gap-1 text-xs md:text-sm text-emerald-600 font-medium hover:text-emerald-700"
                       >
@@ -388,17 +396,16 @@ export default function WorksPage() {
                           トップページの一覧に戻る
                         </span>
                         <span className="text-[11px]">↩</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
-              </div>
-            </section>
-          ))}
-        </div>
+                </div>
+              </section>
+            ))}
+          </div>
 
         {/* お問い合わせセクション（home と同じイメージ） */}
-        <section className="mt-20">
-          <div className="border-y border-dashed border-slate-300 py-10 md:py-12 text-center space-y-6">
+          <section className="mt-16 md:mt-20 border-t border-dashed border-[#f3d5eb] pt-10 md:pt-12 text-center space-y-6">
             <h2 className="text-xl md:text-2xl font-bold">お問い合わせ</h2>
 
             <p className="text-sm md:text-base text-slate-700 leading-relaxed">
@@ -406,26 +413,23 @@ export default function WorksPage() {
               下記よりお気軽にご相談ください！
             </p>
 
-            <a
-              href="/#contact" // ← home と同じリンク先に合わせてください
-              className="inline-flex items-center justify-center rounded-full px-10 md:px-16 py-3 md:py-4 bg-emerald-500 text-white text-sm md:text-base font-semibold shadow hover:bg-emerald-600 transition"
-            >
-              ご連絡お待ちしております！
-            </a>
-          </div>
-        </section>
+            <div className="flex justify-center">
+              <ContactCTA />
+            </div>
+          </section>
 
-        {/* 一番下：HOMEへ戻る */}
-        <div className="mt-16 text-center">
-          <a
-            href="/#home"
-            className="inline-flex items-center gap-2 text-sm md:text-base text-emerald-600 font-medium"
-          >
-            <span className="border-b border-emerald-300 pb-0.5">
-              ホームに戻る
-            </span>
-            <span className="text-base">↑</span>
-          </a>
+          {/* 一番下：HOMEへ戻る */}
+          <div className="mt-12 md:mt-16 text-center">
+            <Link
+              href="/#home"
+              className="inline-flex items-center gap-2 text-sm md:text-base text-emerald-600 font-medium"
+            >
+              <span className="border-b border-emerald-300 pb-0.5">
+                ホームに戻る
+              </span>
+              <span className="text-base">↑</span>
+            </Link>
+          </div>
         </div>
       </div>
 
