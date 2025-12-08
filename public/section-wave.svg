@@ -1,0 +1,38 @@
+<!-- public/section-wave.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 16">
+  <path
+    d="
+      M 0 8
+      Q 8 2 16 8
+      T 32 8
+      T 48 8
+      T 64 8
+      T 80 8
+      T 96 8
+      T 112 8
+      T 128 8
+      T 144 8
+      T 160 8
+      T 176 8
+      T 192 8
+      T 208 8
+      T 224 8
+      T 240 8
+      T 256 8
+      T 272 8
+      T 288 8
+      T 304 8
+      T 320 8
+      T 336 8
+      T 352 8
+      T 368 8
+      T 384 8
+      T 400 8
+    "
+    fill="none"
+    stroke="#2f3947ff"          
+    stroke-width="3"         
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

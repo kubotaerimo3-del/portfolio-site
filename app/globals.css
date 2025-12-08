@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/* ← Tailwind v4 では @layer base の中に書くのが安全です */
+@layer base {
+  @font-face {
+    font-family: "Reiko";
+    src: url("/fonts/reiko_font.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .font-reiko {
+    font-family: "Reiko", system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+  }
+}
+
+.bg-page {
+  background: radial-gradient(circle at top, #fff7fb 0%, #fffafc 35%, #ffffff 100%);
+}
+
+:root {
+  --background: #f9daf9;
+  --foreground: #333333;
+}
+
+/* まるっと全体で使う用 */
+.font-main {
+  font-family: var(--font-main), system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 固定ヘッダー分だけ余白をとって止まるようにしたい場合 */
+section {
+  scroll-margin-top: 80px; /* 必要に応じて数字を調整 */
+}
+
+@theme inline {
+  /* 背景 & 前景 */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* フォント */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* 文字色を #333 に寄せる（slate系だけ上書き） */
+  --color-slate-900: #333333;
+  --color-slate-800: #333333;
+  --color-slate-700: #333333;
+  --color-slate-600: #333333;
+  --color-slate-500: #333333;
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #f9daf9;
+    --foreground: #333333;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* セクションタイトル用：手書き風の破線 */
+.section-dash {
+  height: 8px;
+  background-image: url("/section-dash.svg");
+  background-repeat: repeat-x;
+  background-size: 60px 8px;
+  opacity: 0.95;
+}
+
+/* ===== モーダル用アニメーション ===== */
+.modal-panel {
+  animation: modal-fade 0.18s ease-out;
+  transform-origin: center;
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeUp {
+  0%   { opacity:0; transform:translateY(10px) scale(0.98); }
+  100% { opacity:1; transform:translateY(0) scale(1); }
+}
+
+@keyframes fadeHero {
+  0%   { opacity:0; transform:translateY(2px) scale(0.99); }
+  100% { opacity:1; transform:translateY(0) scale(1); }
+}
+
+@keyframes fadeAbout {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+    filter: blur(2px);
+  }
+  60% {
+    filter: blur(0.6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.scroll-fade {
+  opacity: 0;
+  filter: blur(6px);             
+  transform: translateY(8px);   
+  transition:
+    opacity 0.9s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 0.9s cubic-bezier(0.25, 0.8, 0.25, 1),
+    filter 1.05s ease-out;
+}
+
+.scroll-fade-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+
+/* ===== 戻るボタンの位置調整（ページ内のカードに寄せる） ===== */
+.back-to-top-position {
+  position: fixed;
+  z-index: 50;
+  bottom: 24px;
+
+  /* 画面幅が広いときは「max-w-4xl（約896px）」の右端＋16px に寄せる */
+  right: max(16px, calc((100vw - 896px) / 2 + 16px));
+}
+
+/* スマホでは素直に画面右下に寄せる */
+@media (max-width: 768px) {
+  .back-to-top-position {
+    right: 16px;
+    bottom: 20px;
+  }
+}
