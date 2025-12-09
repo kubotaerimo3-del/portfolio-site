@@ -53,13 +53,13 @@ useEffect(() => {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#fff6f8]">
+    <main className="min-h-screen bg-[#fff6f8] text-slate-900">
       {/* 共通ヘッダー */}
       <Header />
 
       {/* ★ ファーストビュー（PC：左イラスト＋右テキスト / SP：上にPNG） */}
       <section id="home">
-        <div ref={heroRef} className="scroll-fade mx-auto w-full max-w-4xl px-4 md:px-6 py-10 md:py-12">
+        <div ref={heroRef} className="scroll-fade mx-auto w-full max-w-4xl px-[10%] md:px-6 py-10 md:py-12">
           {/* ▼ スマホ用：一番上に表示する 1 枚PNG */}
           <div className="md:hidden mb-10">
             <img
@@ -72,20 +72,22 @@ useEffect(() => {
           {/* ▼ PC：左右２カラム / SP：１カラム */}
           <div className="grid gap-10 md:gap-16 md:grid-cols-2 items-center">
             {/* 左カラム：PC用メインイラスト */}
-            <div className="hidden md:block">
-              <div className="relative rounded-[40px] bg-[#ffe5ee] shadow-[0_24px_80px_rgba(0,0,0,0.12)] px-10 py-10 flex items-center justify-center">
+            <div className="hidden md:flex items-center justify-center">
+              <div className="relative">
                 <img
                   src="/FV-PC.png"
                   alt="くぼた えりのポートフォリオ メインイラスト"
-                  className="w-full max-w-[360px] h-auto"
+                  className="w-full max-w-[360px] h-auto rounded-[40px]"
+                  // ★ 画像自体に丸みだけ残してカード感を弱く
                 />
               </div>
             </div>
 
+
             {/* 右カラム：テキスト＋ボタン（SP/PC 共通） */}
             <div className="text-center md:text-left">
               <p className="text-xs md:text-sm mb-3">
-                WEBデザイナー / 動画編集
+                WEBデザイナー / 動画編集 / SNS運用
               </p>
 
               {/* タイトルSVG（PCのみ表示） */}
@@ -139,9 +141,9 @@ useEffect(() => {
       </section>
 
       {/* 私についてセクション */}
-      <section id="about" className="py-6 md:py-8 bg-white">
+      <section id="about" className="py-6 md:py-8 bg-[#fff6f8]">
         {/* ★ 外枠は 5xl：SectionTitle 用（アニメなしで常に表示） */}
-        <div ref={aboutRef} className="scroll-fade max-w-5xl mx-auto px-4">
+        <div ref={aboutRef} className="scroll-fade max-w-5xl mx-auto px-[10%] md:px-4">
           <SectionTitle>私について</SectionTitle>
 
           {/* ★ 中身だけ 4xl にして中央寄せ */}
@@ -159,7 +161,7 @@ useEffect(() => {
                 src="/about-figure.png"
                 alt="プロフィール画像"
                 className="
-                  w-full max-w-[80%] mx-auto rounded-2xl shadow-lg
+                  w-full max-w-[80%] mx-auto rounded-2xl
                   sm:max-w-[380px] md:max-w-[420px]
                   transition-all duration-300
                 "
@@ -200,8 +202,8 @@ useEffect(() => {
       </section>
 
       {/* デザインしたもの セクション */}
-      <section id="works" className="py-6 md:py-8 bg-slate-50">
-        <div ref={worksRef} className="scroll-fade max-w-5xl mx-auto px-4">
+      <section id="works" className="py-6 md:py-8 bg-[#fff6f8]">
+        <div ref={worksRef} className="scroll-fade max-w-5xl mx-auto px-[10%] md:px-4">
           <SectionTitle>デザインしたもの</SectionTitle>
 
           <p className="text-sm md:text-base text-slate-600 mb-8">
@@ -248,16 +250,28 @@ useEffect(() => {
       </section>
 
       {/* ▼ お問い合わせ Section */}
-      <section id="contact" className="py-4 md:py-8 bg-slate-50">
-        <div ref={contactRef} className="scroll-fade max-w-5xl mx-auto px-4 text-center">
+      <section id="contact" 
+      className="mt-24 pb-16 md:pb-20 bg-[#fff6f8]">
+        <div ref={contactRef} className="scroll-fade max-w-5xl mx-auto px-[10%] md:px-4 text-center">
           <SectionTitle>お問い合わせ</SectionTitle>
-          <p className="text-sm mb-10">
-            最後までご覧いただきありがとうございます。<br />
+
+          <p
+            className="
+              mt-6
+              mx-auto          // 中央寄せだけ残す
+              text-xs md:text-base
+              leading-relaxed text-[#333]
+            "
+          >
+            ご覧いただきありがとうございます。<br />
             「こんなデザインできる？」「ポートフォリオの詳細が知りたい」など、<br />
             まずはお気軽にご相談ください。
           </p>
+
           {/* ★ ContactCTA コンポーネントを使用 */}
-          <ContactCTA />
+          <div className="mt-10">
+            <ContactCTA />
+          </div>
         </div>
       </section>
       {/* 追従「戻る」ボタン */}

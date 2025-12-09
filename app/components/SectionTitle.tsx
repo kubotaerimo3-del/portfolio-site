@@ -9,18 +9,20 @@ type SectionTitleProps = {
 
 export default function SectionTitle({ children }: SectionTitleProps) {
   return (
-    <div className="mb-10 md:mb-14">
-      <div className="flex items-center gap-3 md:gap-4">
-        {/* 左側：短めの破線（PC のみ表示） */}
-        <div className="hidden md:block w-40 section-dash" />
+    <div className="mb-10 md:mb-14 w-full">
+      <div className="mx-auto w-full max-w-5xl">
+        <div className="flex items-center gap-3 md:gap-4">
+          {/* SP: 左右どちらも flex-1 で同じ長さ / PC: 左だけ短い 40px */}
+          <div className="flex-1 md:flex-none md:w-40 h-[6px] section-dash" />
 
-        {/* タイトル文字（SP は中央、PC は少し左寄り） */}
-        <h2 className="text-lg md:text-3xl font-bold text-slate-900 text-center md:text-left whitespace-nowrap">
-          {children}
-        </h2>
+          {/* タイトル：SP 少し大きめ & 中央 / PC は左寄せ */}
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center md:text-left px-1 whitespace-nowrap">
+            {children}
+          </h2>
 
-        {/* 右側：長めの破線 */}
-        <div className="flex-1 h-[6px] section-dash" />
+          {/* 右側の破線（PC も今まで通り長め） */}
+          <div className="flex-1 h-[6px] section-dash" />
+        </div>
       </div>
     </div>
   );
