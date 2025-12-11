@@ -1,10 +1,12 @@
 // app/about/page.tsx
 "use client";
 
+import Image from "next/image";
 import Header from "../components/Header";
 import ContactCTA from "../components/ContactCTA";
 import BackToTopButton from "../components/BackToTopButton";
 import SectionTitle from "../components/SectionTitle";
+import aboutPortrait from "@/public/about-my-face.png";
 
 type Tool = {
   name: string;
@@ -14,8 +16,8 @@ type Tool = {
 const designTools: Tool[] = [
   { name: "Figma", icon: "/tools/figma.svg" },
   { name: "Canva", icon: "/tools/canva.svg" },
-  { name: "SUTADIO", icon: "/tools/sutadio.svg" },
-  { name: "VScord", icon: "/tools/vscord.svg" },
+  { name: "STUDIO", icon: "/tools/sutadio.svg" },
+  { name: "VS Code", icon: "/tools/vscord.svg" },
   { name: "Affinity", icon: "/tools/affinity.svg" },
   { name: "Photoshop", icon: "/tools/photoshop.svg" },
   { name: "Illustrator", icon: "/tools/illustrator.svg" },
@@ -95,12 +97,16 @@ export default function AboutPage() {
                 className="
                   relative w-full
                   max-w-[260px] sm:max-w-[300px] md:max-w-[420px]  // ★ SP の写真を少し小さく
+                  aspect-[3/4]
                 "
               >
-                <img
-                  src="/about-my-face.png"
+                <Image
+                  src={aboutPortrait}
                   alt="久保田恵里の写真"
-                  className="relative w-full h-auto rounded-[28px] object-cover"
+                  fill
+                  sizes="(min-width: 1024px) 420px, (min-width: 640px) 300px, 260px"
+                  className="rounded-[28px] object-cover"
+                  priority
                 />
               </div>
             </div>
@@ -112,7 +118,7 @@ export default function AboutPage() {
           <SectionTitle>できること</SectionTitle>
 
           {/* ★ SP は幅を少し絞って中央寄せ・PC は3カラム */}
-          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid gap-4 md:gap-6 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
             {[
               "動画編集（ショート・長尺）",
               "サムネイル・バナー制作",
@@ -124,13 +130,11 @@ export default function AboutPage() {
               <div
                 key={item}
                 className="
-w-[60%] md:w-full
-          mx-auto
-          rounded-2xl bg-[#fffbfe] border border-[#f3d5eb]
-          px-4 py-3
-          text-xs md:text-sm font-medium text-slate-800
-          text-center md:text-left
-          shadow-[0_6px_18px_rgba(0,0,0,0.05)]
+                  rounded-2xl bg-[#fffbfe] border border-[#f3d5eb]
+                  px-4 py-3
+                  text-xs md:text-sm font-medium text-slate-800
+                  text-center md:text-left
+                  shadow-[0_6px_18px_rgba(0,0,0,0.05)]
                 "
               >
                 {item}
@@ -225,9 +229,11 @@ function ToolGroup({ title, tools }: ToolGroupProps) {
       >
         {tools.map((tool) => (
           <div key={tool.name} className="flex flex-col items-center md:items-start gap-2">
-            <img
+            <Image
               src={tool.icon}
               alt={tool.name}
+              width={64}
+              height={64}
               className="w-12 h-12 md:w-16 md:h-16 object-contain"
             />
             <span className="block w-full text-[11px] md:text-sm text-slate-700 text-center">

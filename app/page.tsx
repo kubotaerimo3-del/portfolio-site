@@ -1,7 +1,13 @@
 // app/page.tsx
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
+
+import heroFigureMobile from "@/public/FV-mobile.png";
+import heroFigurePc from "@/public/FV-PC.png";
+import heroTitle from "@/public/hero-title.svg";
+import aboutFigure from "@/public/about-figure.png";
 
 import Header from "./components/Header";
 import SectionTitle from "./components/SectionTitle";
@@ -18,15 +24,49 @@ export default function Home() {
   const worksRef = useRef<HTMLDivElement | null>(null);
   const contactRef = useRef<HTMLDivElement | null>(null);
 
-// hero / about → 最初だけふわっと
-useEffect(() => {
-  if (heroRef.current) heroRef.current.classList.add("scroll-fade-visible");
-  if (aboutRef.current) aboutRef.current.classList.add("scroll-fade-visible");
-}, []);
+  const scrollToSection = (targetId: string) => {
+    if (typeof window === "undefined") return;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const el = document.getElementById(targetId);
+    if (!el) return;
+    el.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "start",
+    });
+  };
+
+  // hero / about → 最初だけふわっと
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) {
+      heroRef.current?.classList.add("scroll-fade-visible");
+      aboutRef.current?.classList.add("scroll-fade-visible");
+      return;
+    }
+
+    if (heroRef.current) heroRef.current.classList.add("scroll-fade-visible");
+    if (aboutRef.current) aboutRef.current.classList.add("scroll-fade-visible");
+  }, []);
 
   // works / contact → 画面に入ったときにふわっと表示
   useEffect(() => {
     if (typeof window === "undefined") return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) {
+      worksRef.current?.classList.add("scroll-fade-visible");
+      contactRef.current?.classList.add("scroll-fade-visible");
+      return;
+    }
 
     const targets: (HTMLElement | null)[] = [worksRef.current, contactRef.current];
 
@@ -62,10 +102,11 @@ useEffect(() => {
         <div ref={heroRef} className="scroll-fade mx-auto w-full max-w-4xl px-[10%] md:px-6 py-10 md:py-12">
           {/* ▼ スマホ用：一番上に表示する 1 枚PNG */}
           <div className="md:hidden mb-10">
-            <img
-              src="/FV-mobile.png"
+            <Image
+              src={heroFigureMobile}
               alt="くぼた えりのポートフォリオ スマホ用メインビジュアル"
               className="w-full max-w-[420px] mx-auto rounded-[32px] object-cover"
+              priority
             />
           </div>
 
@@ -74,11 +115,11 @@ useEffect(() => {
             {/* 左カラム：PC用メインイラスト */}
             <div className="hidden md:flex items-center justify-center">
               <div className="relative">
-                <img
-                  src="/FV-PC.png"
+                <Image
+                  src={heroFigurePc}
                   alt="くぼた えりのポートフォリオ メインイラスト"
                   className="w-full max-w-[360px] h-auto rounded-[40px]"
-                  // ★ 画像自体に丸みだけ残してカード感を弱く
+                  priority
                 />
               </div>
             </div>
@@ -92,10 +133,11 @@ useEffect(() => {
 
               {/* タイトルSVG（PCのみ表示） */}
               <div className="hidden md:block mb-6">
-                <img
-                  src="/hero-title.svg"
+                <Image
+                  src={heroTitle}
                   alt="くぼた えりのポートフォリオ"
                   className="w-[260px] md:w-[360px] h-auto mx-auto md:mx-0"
+                  priority
                 />
               </div>
 
@@ -126,11 +168,7 @@ useEffect(() => {
                 {/* デザインしたもの */}
                 <PinkPillButton
                   className="w-[70%] max-w-xs sm:w-auto"
-                  onClick={() => {
-                    const el = document.getElementById("works");
-                    if (!el) return;
-                    el.scrollIntoView({ behavior: "smooth", block: "start" });
-                  }}
+                  onClick={() => scrollToSection("contact")}
                 >
                   デザインしたものを見る
                 </PinkPillButton>
@@ -157,14 +195,16 @@ useEffect(() => {
           >
             {/* 右：画像（モバイルでは上） */}
             <div className="order-1 md:order-2 flex justify-center md:justify-end">
-              <img
-                src="/about-figure.png"
+              <Image
+                src={aboutFigure}
                 alt="プロフィール画像"
                 className="
                   w-full max-w-[80%] mx-auto rounded-2xl
                   sm:max-w-[380px] md:max-w-[420px]
                   transition-all duration-300
                 "
+                sizes="(min-width: 1024px) 420px, (min-width: 640px) 380px, 80vw"
+                priority
               />
             </div>
 
@@ -261,8 +301,7 @@ useEffect(() => {
       </section>
 
       {/* ▼ お問い合わせ Section */}
-      <section id="contact" 
-      className="mt-24 pb-16 md:pb-20">
+      <section id="contact" className="mt-24 pb-16 md:pb-20">
         <div ref={contactRef} className="scroll-fade max-w-5xl mx-auto px-[10%] md:px-4 text-center">
           <SectionTitle>お問い合わせ</SectionTitle>
 

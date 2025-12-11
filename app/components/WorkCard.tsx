@@ -1,6 +1,7 @@
 // app/components/WorkCard.tsx
 "use client";
 
+import Image from "next/image";
 import PinkPillButton from "./PinkPillButton";
 
 type WorkCardProps = {
@@ -45,18 +46,17 @@ export default function WorkCard({
       "
     >
       <div className="w-full">
-      <img
-        src={imageSrc}
-        alt={imageAlt}
-        className="
-          w-full
-          rounded-xl aspect-square object-cover
-
-          /* 📱 SP時のみ画像縮小 */
-          max-w-[75%] mx-auto sm:max-w-full
-          transition-all duration-300
-        "
-      />
+        <div
+          className="relative rounded-xl overflow-hidden aspect-square max-w-[75%] mx-auto sm:max-w-full"
+        >
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            fill
+            sizes="(min-width: 1024px) 320px, (min-width: 768px) 40vw, 75vw"
+            className="object-cover transition-all duration-300"
+          />
+        </div>
       </div>
 
       <h3 className="text-sm font-semibold mb-1 text-slate-900">{title}</h3>

@@ -1,8 +1,10 @@
 // app/components/Header.tsx
 "use client";
 
+import Image from "next/image";
 import { useLayoutEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import logo from "@/public/icon.png";
 
 const navItems = [
   { id: "home", label: "ホーム" },
@@ -197,10 +199,11 @@ export default function Header({
             active:scale-[0.97] active:translate-y-[1px]
           "
         >
-          <img
-            src="/icon.png"
+          <Image
+            src={logo}
             alt="くぼた えり ポートフォリオのロゴ"
             className="h-[60px] w-auto transition-all duration-300"
+            priority
           />
         </button>
 

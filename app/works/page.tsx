@@ -1,6 +1,7 @@
 // app/works/page.tsx
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import SecondaryButton from "../components/SecondaryButton";
 import BackToTopButton from "../components/BackToTopButton";
@@ -199,7 +200,7 @@ export default function WorksPage() {
     works.forEach((work) => {
       if (work.type === "banner") {
         work.images.forEach((src) => {
-          const img = new Image();
+          const img = new window.Image();
           img.src = src;
         });
       } else if (work.type === "lp") {
@@ -207,12 +208,12 @@ export default function WorksPage() {
           Boolean
         ) as string[];
         targets.forEach((src) => {
-          const img = new Image();
+          const img = new window.Image();
           img.src = src;
         });
       } else if (work.type === "card") {
         [work.front, work.back].forEach((src) => {
-          const img = new Image();
+          const img = new window.Image();
           img.src = src;
         });
       }
@@ -291,11 +292,13 @@ export default function WorksPage() {
                                       shadow-lg shadow-black/5
                                       transition-all duration-200
                                       hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/10
-                                      active:translate-y-0 active:shadow-lg">
-                                    <img
+                                      active:translate-y-0 active:shadow-lg relative">
+                                    <Image
                                       src={src}
                                       alt={work.title}
-                                      className="w-full h-full object-cover scale-[1.06]"
+                                      fill
+                                      sizes="(min-width: 768px) 220px, 45vw"
+                                      className="object-cover scale-[1.06]"
                                     />
                                   </div>
                                 </button>
@@ -316,11 +319,13 @@ export default function WorksPage() {
                                   shadow-lg shadow-black/5
                                   transition-all duration-200
                                   hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/10
-                                  active:translate-y-0 active:shadow-lg">
-                                  <img
+                                  active:translate-y-0 active:shadow-lg relative">
+                                  <Image
                                     src={work.images[0]}
                                     alt={work.title}
-                                    className="w-full h-full object-cover scale-[1.06]"
+                                    fill
+                                    sizes="(min-width: 768px) 260px, 70vw"
+                                    className="object-cover scale-[1.06]"
                                   />
                                 </div>
                               </button>
@@ -342,7 +347,7 @@ export default function WorksPage() {
                               shadow-lg shadow-black/5
                               transition-all duration-200
                               hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/10
-                              active:translate-y-0 active:shadow-lg">
+                              active:translate-y-0 active:shadow-lg relative">
                               {work.videoUrl ? (
                                 <a
                                   href={work.videoUrl}
@@ -350,10 +355,12 @@ export default function WorksPage() {
                                   rel="noopener noreferrer"
                                   className="block w-full h-full"
                                 >
-                                  <img
+                                  <Image
                                     src={work.image}
                                     alt={work.title}
-                                    className="w-full h-full object-cover scale-[1.06]"
+                                    fill
+                                    sizes="(min-width: 768px) 260px, 70vw"
+                                    className="object-cover scale-[1.06]"
                                   />
                                 </a>
                               ) : (
@@ -367,10 +374,12 @@ export default function WorksPage() {
                                   }
                                   className="block w-full h-full cursor-zoom-in hover:opacity-90 transition"
                                 >
-                                  <img
+                                  <Image
                                     src={work.image}
                                     alt={work.title}
-                                    className="w-full h-full object-cover scale-[1.06]"
+                                    fill
+                                    sizes="(min-width: 768px) 260px, 70vw"
+                                    className="object-cover scale-[1.06]"
                                   />
                                 </button>
                               )}
@@ -392,25 +401,27 @@ export default function WorksPage() {
                                 key={i}
                                 type="button"
                                 onClick={() => openImage(src, "normal")}
-                                className="cursor-zoom-in hover:opacity-90 transition"
-                              >
-                                <div className="w-full max-w-[220px] aspect-square rounded-2xl overflow-hidden
+                                  className="cursor-zoom-in hover:opacity-90 transition"
+                                >
+                                  <div className="w-full max-w-[220px] aspect-square rounded-2xl overflow-hidden
                                   bg-transparent
                                   shadow-lg shadow-black/5
                                   transition-all duration-200
                                   hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/10
-                                  active:translate-y-0 active:shadow-lg">
-                                  <img
-                                    src={src}
-                                    alt={`${work.title} ${
+                                  active:translate-y-0 active:shadow-lg relative">
+                                  <Image
+                                      src={src}
+                                      alt={`${work.title} ${
                                       i === 0 ? "表" : "裏"
-                                    }`}
-                                    className="w-full h-full object-cover scale-[1.01]"
-                                  />
-                                </div>
-                              </button>
-                            ))}
-                          </div>
+                                      }`}
+                                      fill
+                                      sizes="(min-width: 768px) 220px, 45vw"
+                                      className="object-cover scale-[1.01]"
+                                    />
+                                  </div>
+                                </button>
+                              ))}
+                            </div>
 
                           <p className="text-xs text-slate-500 mt-1 text-center">
                             画像をタップすると、全体が見られます👀✨
@@ -515,11 +526,18 @@ export default function WorksPage() {
                 : "w-[min(700px,80vw)] max-h-[80vh]"
             }`}
           >
-            <img
-              src={modal.src}
-              alt=""
-              className="w-full h-auto object-contain"
-            />
+            <div
+              className="relative w-full"
+              style={{ aspectRatio: modal.variant === "lp" ? "9 / 16" : "1 / 1" }}
+            >
+              <Image
+                src={modal.src}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 60vw, 90vw"
+                className="object-contain"
+              />
+            </div>
             <button
               type="button"
               onClick={closeModal}
