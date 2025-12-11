@@ -42,7 +42,7 @@ const languageTools: Tool[] = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-[#fff6f8] text-slate-900">
+    <main className="min-h-screen text-slate-900 pt-20 md:pt-24">
       <Header currentSection="about" enableSectionTracking={false} />
 
       {/* ★ 左右の余白を SP でも少し広めに（px-5） */}
@@ -64,12 +64,24 @@ export default function AboutPage() {
               </p>
               <p>
                 SNS運用やWEBデザインを通して、企業やお店の魅力をカタチにするお手伝いをしています。
-                「 まずやってみる」「なんとかなる」を合言葉に、目的に寄り添うデザインを大切にしています。
+              </p>
+              <p className="mt-6 font-semibold text-sm md:text-base">
+                これまでのこと
               </p>
               <p>
-                ものづくりの原点は高校の文化祭。手作りのポーチが完売した経験から、
-                パタンナーを目指して専門学校へ進学しました。結婚・出産後は医療事務として働きながら、
-                再びクリエイティブへの想いが強くなり、動画編集とWEBデザインを学び直しています。
+                私の“ものづくり”の原点は、高校生の文化祭でした。<br />
+                手作りのポーチを制作して販売したら、なんと完売。<br />
+                この経験がきっかけでパタンナーを目指し、専門学校に進学しました。<br />
+                パタンナーとして就職しましたが、結婚・妊娠・出産を機に退職。家庭と子育てを優先しながら、医療事務の資格を取得し、長く医療事務の仕事を続けてきました。
+              </p>
+              <p className="mt-4 font-semibold text-sm md:text-base">
+                今、取り組んでいること
+              </p>
+              <p>
+                そんな中、「やっぱりクリエイティブな仕事がしたい！」<br />
+                その気持ちが再燃し、子育ての合間に動画編集を学び、副業として始めたのが現在のキャリアのスタートです。<br />
+                その後、動画編集を続ける中でもっと効果的に魅力を届けるためには、デザインやマーケティングの知識が必要だと感じました<br />
+                そこで、動画編集だけでなくWEBデザインやSNS運用のスキルも習得し、現在はフリーランスとして活動しています。
               </p>
               <p>
                 動画編集では魅力を伝える導線、デザインでは見る人の気持ちに寄り添う余白と色を意識。
@@ -104,10 +116,10 @@ export default function AboutPage() {
             {[
               "動画編集（ショート・長尺）",
               "サムネイル・バナー制作",
-              "LP / 名刺 / 簡単なWEBサイト制作",
+              "LP / 名刺 / WEBサイト制作",
               "SNS運用の設計・効率化",
               "マーケ視点での構成提案",
-              // "Googleワークスペースでの業務改善",
+              "GASを使った業務効率化",
             ].map((item) => (
               <div
                 key={item}
@@ -134,7 +146,7 @@ w-[60%] md:w-full
           <div className="grid gap-10 md:gap-12">
             <ToolGroup title="デザイン・動画制作" tools={designTools} />
             <ToolGroup title="コミュニケーション・業務" tools={communicationTools} />
-            <ToolGroup title="学習中の言語" tools={languageTools} />
+            <ToolGroup title="言 語" tools={languageTools} />
           </div>
         </section>
 
@@ -176,44 +188,49 @@ type ToolGroupProps = {
 
 function ToolGroup({ title, tools }: ToolGroupProps) {
   return (
-    <div className="space-y-4">
-      {/* ★ ラベルは PC / SP 共通で見やすいサイズ */}
-      <div className="flex justify-center">
+    <div
+      className="
+        rounded-3xl
+        bg-[#fffafb]
+        border border-[#f7d9ee]
+        shadow-[0_10px_25px_rgba(0,0,0,0.03)]
+        px-5 md:px-6 py-6 md:py-7
+        space-y-4 md:space-y-3
+      "
+    >
+      {/* 小見出しピル */}
+      <div className="flex justify-center md:justify-start mb-4 md:mb-6">
         <span
           className="
             inline-flex items-center justify-center
             rounded-full border border-[#f3cfe6]
-            bg-[#ffeef9]     // 薄いピンクベース
+            bg-[#ffeef9]
             px-4 py-1
             text-xs md:text-sm font-semibold text-slate-700
+            shadow-[0_4px_10px_rgba(0,0,0,0.04)]
           "
         >
           {title}
         </span>
       </div>
 
+      {/* アイコンのグリッド */}
       <div
         className="
           grid grid-cols-3 sm:grid-cols-3 md:grid-cols-5
-          gap-x-6 gap-y-8
+          gap-x-6 gap-y-6 md:gap-y-10
           justify-items-center
+          mx-auto
         "
       >
         {tools.map((tool) => (
-          <div key={tool.name} className="flex flex-col items-center gap-2">
+          <div key={tool.name} className="flex flex-col items-center md:items-start gap-2">
             <img
               src={tool.icon}
               alt={tool.name}
-              className="
-                w-14 h-14 md:w-16 md:h-16
-                rounded-2xl
-                object-contain
-                shadow-[0_4px_16px_rgba(0,0,0,0.10)]
-              "
+              className="w-12 h-12 md:w-16 md:h-16 object-contain"
             />
-
-            {/* ★ アイコンタイトル：少し大きめ＆色も少し濃く */}
-            <span className="text-[11px] md:text-sm text-slate-700 text-center">
+            <span className="block w-full text-[11px] md:text-sm text-slate-700 text-center">
               {tool.name}
             </span>
           </div>

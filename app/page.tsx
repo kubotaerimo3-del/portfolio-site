@@ -53,7 +53,7 @@ useEffect(() => {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#fff6f8] text-slate-900">
+    <main className="min-h-screen text-slate-900 pt-20 md:pt-24">
       {/* 共通ヘッダー */}
       <Header />
 
@@ -65,7 +65,7 @@ useEffect(() => {
             <img
               src="/FV-mobile.png"
               alt="くぼた えりのポートフォリオ スマホ用メインビジュアル"
-              className="w-full max-w-[420px] mx-auto rounded-[32px] shadow-lg"
+              className="w-full max-w-[420px] mx-auto rounded-[32px] object-cover"
             />
           </div>
 
@@ -141,7 +141,7 @@ useEffect(() => {
       </section>
 
       {/* 私についてセクション */}
-      <section id="about" className="py-6 md:py-8 bg-[#fff6f8]">
+      <section id="about" className="py-6 md:py-8">
         {/* ★ 外枠は 5xl：SectionTitle 用（アニメなしで常に表示） */}
         <div ref={aboutRef} className="scroll-fade max-w-5xl mx-auto px-[10%] md:px-4">
           <SectionTitle>私について</SectionTitle>
@@ -178,13 +178,24 @@ useEffect(() => {
                 モットーは「まず、やってみる」「なんとかなる」です。
               </p>
               <p>
-                私が目指すのは、シンプルだけど心を惹きつけるデザイン。<br />
+                私が目指すのは、シンプルだけど心を惹きつけるデザイン。
                 サイトに来やすく、見やすい。<br />
                 そして、お客様のお話をじっくり聞きながら、デザインを通じて求める結果へ導くことです。
               </p>
               <p>
                 あなたの想いを、もっと多くの人に届けるために。<br />
                 ぜひ一度、お話ししましょう！
+              </p>
+              <p className="text-sm md:text-base leading-relaxed">
+                ポートフォリオサイト自体もひとつの制作物として、
+                自然に視線と動線が流れるレイアウトを意識して設計しています。<br />
+                とくに、
+                <span className="font-semibold">「迷わずに知りたい情報にたどり着けること」</span>
+                を大切にし、文字サイズやボタン配置など
+                UI / UX の細かな使い心地にもこだわりました。
+              </p>
+              <p>
+                私の詳しい経歴やスキルセットについては、aboutページでご紹介しています。
               </p>
             </div>
           </div>
@@ -202,7 +213,7 @@ useEffect(() => {
       </section>
 
       {/* デザインしたもの セクション */}
-      <section id="works" className="py-6 md:py-8 bg-[#fff6f8]">
+      <section id="works" className="py-6 md:py-8">
         <div ref={worksRef} className="scroll-fade max-w-5xl mx-auto px-[10%] md:px-4">
           <SectionTitle>デザインしたもの</SectionTitle>
 
@@ -251,7 +262,7 @@ useEffect(() => {
 
       {/* ▼ お問い合わせ Section */}
       <section id="contact" 
-      className="mt-24 pb-16 md:pb-20 bg-[#fff6f8]">
+      className="mt-24 pb-16 md:pb-20">
         <div ref={contactRef} className="scroll-fade max-w-5xl mx-auto px-[10%] md:px-4 text-center">
           <SectionTitle>お問い合わせ</SectionTitle>
 

@@ -16,11 +16,13 @@ type NavId = (typeof navItems)[number]["id"];
 const sectionIds: NavId[] = ["home", "about", "works", "contact"];
 const SCROLL_OFFSET = 120;
 
+// ★ スクロール位置から「今どのセクションか」を判定する関数
 const getActiveSection = (scrollY: number): NavId => {
   const viewportHeight = window.innerHeight;
   const docHeight = document.documentElement.scrollHeight;
   const scrollBottom = scrollY + viewportHeight;
 
+  // ページのほぼ一番下に来たら contact をアクティブ扱い
   if (scrollBottom >= docHeight - 4) {
     return "contact";
   }
@@ -59,7 +61,7 @@ export default function Header({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<NavId>(currentSection);
 
-  // ★ ユーザーが一度でもスクロールしたかどうか
+  // ★ ユーザーが一度でもスクロールしたか
   const [hasUserScrolled, setHasUserScrolled] = useState(false);
 
   useLayoutEffect(() => {
@@ -74,34 +76,27 @@ export default function Header({
         setActiveSection(getActiveSection(scrollY));
       }
 
-      // 初回（マウント直後）の handleScroll 呼び出しでは
-      // 「ユーザーがスクロールした」とみなさない
       if (!isFirstCall && scrollY > 0) {
         setHasUserScrolled(true);
       }
       isFirstCall = false;
     };
 
-    // 初期ロード時：現在のスクロール位置を元に状態を即セット（transitionなし）
     handleScroll();
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [enableSectionTracking]);
 
-  // ✅ ヘッダー全体のトランジションは「ユーザーがスクロールしてから」有効化
   const headerTransitionClass = hasUserScrolled
     ? "transition-all duration-300"
     : "transition-none";
 
-  // ✅ ナビリンク用クラス：こちらも hasUserScrolled で transition を切り替える
   const navLinkClass = (id: NavId) => {
     const base =
       "inline-flex items-center justify-center " +
       "rounded-2xl border-[0.8px] border-solid " +
       "px-5 md:px-6 py-1.5 md:py-2 " +
       "text-sm md:text-base font-semibold tracking-[0.02em] " +
-      // ⬇ transition は hasUserScrolled が true になってから
       (hasUserScrolled ? "transition-all duration-150 transform " : "transform ") +
       "active:scale-[0.97] active:translate-y-[1px]";
 
@@ -127,25 +122,8 @@ export default function Header({
     return base + (isActive ? activeClasses : inactiveClasses);
   };
 
-  const handleNavClick = (id: NavId) => {
-    setActiveSection(id);
-    setIsMenuOpen(false);
-
-    if (!enableSectionTracking) {
-      const destinations: Record<NavId, string> = {
-        home: "/",
-        about: "/about",
-        works: "/works",
-        contact: "/#contact",
-      };
-
-      router.push(destinations[id]);
-      return;
-    }
-    
-    const el = document.getElementById(id);
-    if (!el) return;
-
+  // ★ 共通スクロール関数（SP はヘッダー分オフセット）
+  const scrollToSection = (el: HTMLElement) => {
     const isMobile = window.innerWidth < 768;
 
     if (!isMobile) {
@@ -163,25 +141,52 @@ export default function Header({
     window.scrollTo({ top: targetY, behavior: "smooth" });
   };
 
+  const handleNavClick = (id: NavId) => {
+    setActiveSection(id);
+    setIsMenuOpen(false);
+
+    // ① まず「今いるページ内」に同じ id のセクションがあるか探す
+    const el = document.getElementById(id);
+    if (el) {
+      scrollToSection(el);
+      return;
+    }
+
+    // ② 無い場合だけ、セクショントラッキングOFFのページでルーティング
+    if (!enableSectionTracking) {
+      const destinations: Record<NavId, string> = {
+        home: "/",
+        about: "/about",
+        works: "/works",
+        contact: "/#contact", // ← TOP の問い合わせに飛ばすフォールバック
+      };
+
+      router.push(destinations[id]);
+      return;
+    }
+
+    // enableSectionTracking = true で対象 id が無い場合は何もしない
+  };
+
   return (
-    <header
+  <header
+    className={`
+      fixed inset-x-0 top-0 z-50
+      backdrop-blur-sm
+      bg-[color:rgba(255,246,248,0.9)]   /* #fff6f8 をうっすら */
+      ${headerTransitionClass}
+      ${isScrolled ? "shadow-[0_4px_20px_rgba(0,0,0,0.15)]" : "shadow-none"}
+    `}
+  >
+    <div
       className={`
-        sticky top-0 z-50
-        backdrop-blur-sm
-        bg-[rgba(255,255,255,0.7)]
+        max-w-5xl mx-auto px-4
+        flex items-center justify-between gap-4
         ${headerTransitionClass}
-        ${isScrolled ? "shadow-[0_4px_20px_rgba(0,0,0,0.15)]" : "shadow-none"}
+        ${isScrolled ? "py-2" : "py-4"}
       `}
     >
-      <div
-        className={`
-          max-w-5xl mx-auto px-4
-          flex items-center justify-between gap-4
-          ${headerTransitionClass}
-          ${isScrolled ? "py-2" : "py-4"}
-        `}
-      >
-        {/* ロゴボタンなどはそのまま */}
+        {/* ロゴ */}
         <button
           type="button"
           onClick={() => handleNavClick("home")}
@@ -239,7 +244,7 @@ export default function Header({
         </button>
       </div>
 
-      {/* SPメニュー展開部分 */}
+      {/* SP メニュー */}
       {isMenuOpen && (
         <div className="md:hidden bg-transparent">
           <nav className="max-w-5xl mx-auto px-4 py-3 flex flex-col gap-3 items-start">

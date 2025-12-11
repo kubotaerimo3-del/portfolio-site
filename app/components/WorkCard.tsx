@@ -41,20 +41,23 @@ export default function WorkCard({
         transition-all duration-200
         hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/10
         active:translate-y-0 active:shadow-lg
+        overflow-hidden 
       "
     >
+      <div className="w-full">
       <img
         src={imageSrc}
         alt={imageAlt}
         className="
           w-full
-          rounded-xl shadow-md object-cover
+          rounded-xl aspect-square object-cover
 
           /* 📱 SP時のみ画像縮小 */
           max-w-[75%] mx-auto sm:max-w-full
           transition-all duration-300
         "
       />
+      </div>
 
       <h3 className="text-sm font-semibold mb-1 text-slate-900">{title}</h3>
       <p className="text-xs text-slate-600 leading-relaxed mb-3">
