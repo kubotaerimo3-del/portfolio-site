@@ -287,12 +287,14 @@ export default function WorksPage() {
                                   onClick={() => openImage(src, "normal")}
                                   className="cursor-zoom-in hover:opacity-90 transition"
                                 >
-                                  <div className="w-full max-w-[220px] aspect-square rounded-2xl overflow-hidden
+                                  <div
+                                    className="w-full max-w-[220px] aspect-square rounded-2xl overflow-hidden
                                       bg-transparent
                                       shadow-lg shadow-black/5
                                       transition-all duration-200
                                       hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/10
-                                      active:translate-y-0 active:shadow-lg relative">
+                                      active:translate-y-0 active:shadow-lg relative"
+                                  >
                                     <Image
                                       src={src}
                                       alt={work.title}
@@ -314,18 +316,20 @@ export default function WorksPage() {
                                 }
                                 className="cursor-zoom-in hover:opacity-90 transition"
                               >
-                                <div className="w-full max-w-[260px] aspect-square rounded-2xl overflow-hidden
-                                  bg-transparent mx-auto
+                                <div
+                                  className="mx-auto w-[240px] aspect-square rounded-2xl overflow-hidden
+                                  bg-transparent
                                   shadow-lg shadow-black/5
                                   transition-all duration-200
                                   hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/10
-                                  active:translate-y-0 active:shadow-lg relative">
+                                  active:translate-y-0 active:shadow-lg relative"
+                                >
                                   <Image
                                     src={work.images[0]}
                                     alt={work.title}
                                     fill
-                                    sizes="(min-width: 768px) 260px, 70vw"
-                                    className="object-cover scale-[1.06]"
+                                    sizes="(min-width: 768px) 240px, 70vw"
+                                    className="object-cover scale-[1.02]"
                                   />
                                 </div>
                               </button>
@@ -395,39 +399,42 @@ export default function WorksPage() {
                       {/* ▼ 名刺作品 */}
                       {work.type === "card" && (
                         <>
-                          <div className="flex gap-4">
+                          <div className="flex justify-center gap-4">
                             {[work.front, work.back].map((src, i) => (
                               <button
                                 key={i}
                                 type="button"
                                 onClick={() => openImage(src, "normal")}
-                                  className="cursor-zoom-in hover:opacity-90 transition"
+                                className="cursor-zoom-in hover:opacity-90 transition"
+                              >
+                                <div
+                                  className="
+                                    w-[160px] md:w-[165px] aspect-square rounded-2xl overflow-hidden
+                                    bg-transparent
+                                    shadow-lg shadow-black/5
+                                    transition-all duration-200
+                                    hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/10
+                                    active:translate-y-0 active:shadow-lg relative
+                                  "
                                 >
-                                  <div className="w-full max-w-[220px] aspect-square rounded-2xl overflow-hidden
-                                  bg-transparent
-                                  shadow-lg shadow-black/5
-                                  transition-all duration-200
-                                  hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/10
-                                  active:translate-y-0 active:shadow-lg relative">
                                   <Image
-                                      src={src}
-                                      alt={`${work.title} ${
-                                      i === 0 ? "表" : "裏"
-                                      }`}
-                                      fill
-                                      sizes="(min-width: 768px) 220px, 45vw"
-                                      className="object-cover scale-[1.01]"
-                                    />
-                                  </div>
-                                </button>
-                              ))}
-                            </div>
+                                    src={src}
+                                    alt={`${work.title} ${i === 0 ? "表" : "裏"}`}
+                                    fill
+                                    sizes="(min-width: 768px) 166px, 140px"
+                                    className="object-cover scale-[1.01]"
+                                  />
+                                </div>
+                              </button>
+                            ))}
+                          </div>
 
                           <p className="text-xs text-slate-500 mt-1 text-center">
                             画像をタップすると、全体が見られます👀✨
                           </p>
                         </>
                       )}
+
                     </div>
 
                     {/* テキスト情報エリア */}
@@ -526,25 +533,49 @@ export default function WorksPage() {
                 : "w-[min(700px,80vw)] max-h-[80vh]"
             }`}
           >
-            <div
-              className="relative w-full"
-              style={{ aspectRatio: modal.variant === "lp" ? "9 / 16" : "1 / 1" }}
-            >
-              <Image
-                src={modal.src}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 60vw, 90vw"
-                className="object-contain"
-              />
-            </div>
-            <button
-              type="button"
-              onClick={closeModal}
-              className="absolute top-2 right-2 rounded-full bg-black/70 text-white text-xs px-2 py-1"
-            >
-              閉じる
-            </button>
+
+        {/* LP 用（縦長をそのままスクロール表示） */}
+        {modal.variant === "lp" ? (
+          <div className="relative w-full">
+            <Image
+              src={modal.src}
+              alt=""
+              // ★ シャンプーLPの実サイズに合わせています
+              width={1440}
+              height={5775}
+              sizes="(min-width: 1024px) 480px, 90vw"
+              className="w-full h-auto"
+            />
+                  <button
+                    type="button"
+                    onClick={closeModal}
+                    className="absolute top-2 right-2 z-10 rounded-full bg-black/70 text-white font-semibold text-xs px-2 py-1"
+                  >
+                    とじる
+                  </button>
+                </div>
+              ) : (
+
+              // バナー / 名刺 用（今まで通り正方形表示）
+              <div className="relative w-full">
+                <Image
+                  src={modal.src}
+                  alt=""
+                  width={1200}    // 適度な横幅（任意）
+                  height={800}    // 必ず元比率に近い値でOK（Next.jsが最適化する）
+                  sizes="(min-width: 1024px) 60vw, 90vw"
+                  className="w-full h-auto object-contain"
+                />
+              {/* 画像右上に重ねる「とじる」 */}
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  className="absolute top-2 right-2 z-10 rounded-full bg-black/70 text-white font-semibold text-xs px-2 py-1"
+                >
+                  とじる
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
