@@ -120,9 +120,9 @@ export default function AboutPage() {
           {/* ★ SP は幅を少し絞って中央寄せ・PC は3カラム */}
           <div className="grid gap-4 md:gap-6 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
             {[
-              "動画編集（ショート・長尺）",
+              "動画編集（ショート・長尺）:YouTube / Instagram / リール など",
               "サムネイル・バナー制作",
-              "LP / 名刺 / WEBサイト制作",
+              "LP / 名刺 / WEBサイト制作 :デザイン〜コーディングまで一貫対応",
               "SNS運用の設計・効率化",
               "マーケ視点での構成提案",
               "GASを使った業務効率化",

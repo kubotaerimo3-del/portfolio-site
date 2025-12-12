@@ -25,7 +25,9 @@ export default function ContactCTA() {
 
       {/* フォームが使えない場合の案内 */}
       <p className="mt-4 text-xs md:text-sm text-slate-700">
-        <span className="text-[11px] md:text-xs">フォームが開かない場合は</span>
+        <span className="text-[11px] md:text-xs">
+          原則２営業日以内にご返信いたします。
+          フォームが開かない場合は</span>
 
         <span className="inline-block mx-1 align-middle">
           <SecondaryButton

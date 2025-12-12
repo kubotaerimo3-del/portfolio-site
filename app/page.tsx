@@ -130,6 +130,10 @@ export default function Home() {
               <p className="text-xs md:text-sm mb-3">
                 WEBデザイナー / 動画編集 / SNS運用
               </p>
+              <p className="text-[11px] md:text-sm text-pink-700 mb-4">
+                個人店・小さな企業さまの魅力を、やさしく届けるデザインを。
+              </p>
+
 
               {/* タイトルSVG（PCのみ表示） */}
               <div className="hidden md:block mb-6">
@@ -235,7 +239,7 @@ export default function Home() {
                 UI / UX の細かな使い心地にもこだわりました。
               </p>
               <p>
-                私の詳しい経歴やスキルセットについては、aboutページでご紹介しています。
+                私の詳しい経歴やスキルセットについては、「私について」ページでご紹介しています。
               </p>
             </div>
           </div>
@@ -296,6 +300,41 @@ export default function Home() {
             >
               この他の作品も、こちらからご覧ください
             </PinkPillButton>
+          </div>
+        </div>
+      </section>
+
+      <section id="flow" className="py-12 md:py-16">
+        <div className="max-w-4xl mx-auto px-[10%] md:px-4 text-center sp-text-left-all">
+          <SectionTitle>ご依頼の流れ</SectionTitle>
+
+          <div className="mt-8 space-y-8 text-sm md:text-base text-slate-700 leading-relaxed">
+
+            <div>
+              <p className="font-bold text-pink-700">STEP 1｜お問い合わせ</p>
+              <p>まずはお気軽にご相談ください。ざっくりした内容でも大丈夫です。</p>
+            </div>
+
+            <div>
+              <p className="font-bold text-pink-700">STEP 2｜ヒアリング</p>
+              <p>オンラインまたはメールで、目的やイメージを丁寧に伺います。</p>
+            </div>
+
+            <div>
+              <p className="font-bold text-pink-700">STEP 3｜ご提案・お見積り</p>
+              <p>構成案やお見積りをご提示し、ご納得いただければ制作へ進みます。</p>
+            </div>
+
+            <div>
+              <p className="font-bold text-pink-700">STEP 4｜デザイン制作・修正</p>
+              <p>目的に合ったデザインを制作し、必要に応じて修正も行います。</p>
+            </div>
+
+            <div>
+              <p className="font-bold text-pink-700">STEP 5｜納品・振り返り</p>
+              <p>データを納品します。ご希望があれば運用のアドバイスも可能です。</p>
+            </div>
+
           </div>
         </div>
       </section>
