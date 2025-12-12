@@ -317,8 +317,7 @@ export default function Home() {
                 className="
                   inline-flex items-center gap-2 
                   rounded-full bg-[#ffeef9] border border-[#f3cfe6]
-                  px-4 py-1 
-                  text-xs md:text-sm font-semibold text-slate-800
+                  px-5 py-2 text-sm md:text-base font-semibold text-slate-800
                   shadow-[0_4px_10px_rgba(0,0,0,0.04)]
                 "
               >
@@ -335,8 +334,7 @@ export default function Home() {
                 className="
                   inline-flex items-center gap-2 
                   rounded-full bg-[#ffeef9] border border-[#f3cfe6]
-                  px-4 py-1 
-                  text-xs md:text-sm font-semibold text-slate-800
+                  px-5 py-2 text-sm md:text-base font-semibold text-slate-800
                   shadow-[0_4px_10px_rgba(0,0,0,0.04)]
                 "
               >
@@ -353,8 +351,7 @@ export default function Home() {
                 className="
                   inline-flex items-center gap-2 
                   rounded-full bg-[#ffeef9] border border-[#f3cfe6]
-                  px-4 py-1 
-                  text-xs md:text-sm font-semibold text-slate-800
+                  px-5 py-2 text-sm md:text-base font-semibold text-slate-800
                   shadow-[0_4px_10px_rgba(0,0,0,0.04)]
                 "
               >
@@ -371,8 +368,7 @@ export default function Home() {
                 className="
                   inline-flex items-center gap-2 
                   rounded-full bg-[#ffeef9] border border-[#f3cfe6]
-                  px-4 py-1 
-                  text-xs md:text-sm font-semibold text-slate-800
+                  px-5 py-2 text-sm md:text-base font-semibold text-slate-800
                   shadow-[0_4px_10px_rgba(0,0,0,0.04)]
                 "
               >
@@ -389,8 +385,7 @@ export default function Home() {
                 className="
                   inline-flex items-center gap-2 
                   rounded-full bg-[#ffeef9] border border-[#f3cfe6]
-                  px-4 py-1 
-                  text-xs md:text-sm font-semibold text-slate-800
+                  px-5 py-2 text-sm md:text-base font-semibold text-slate-800
                   shadow-[0_4px_10px_rgba(0,0,0,0.04)]
                 "
               >
@@ -404,7 +399,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
 
       {/* ▼ お問い合わせ Section */}
       <section id="contact" className="mt-24 pb-16 md:pb-20">
