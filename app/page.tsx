@@ -305,7 +305,7 @@ export default function Home() {
       </section>
 
       {/* ▼ ご依頼の流れ Section */}
-      <section id="flow" className="py-12 md:py-16">
+      <section id="flow" className="pt-12 pb-6 md:pt-16 md:pb-8">
         <div className="max-w-5xl mx-auto px-[10%] md:px-4 text-center sp-text-left-all">
           <SectionTitle>ご依頼の流れ</SectionTitle>
 
