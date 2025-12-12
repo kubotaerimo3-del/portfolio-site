@@ -172,6 +172,12 @@ body {
     right: 16px;
     bottom: 20px;
   }
+  /* スマホで本文を全部左寄せにする */
+  .sp-text-left-all,
+  .sp-text-left-all p,
+  .sp-text-left-all li {
+    text-align: left;
+  }
 }
 
 /* ふわっと出たり消えたりするアニメーション */

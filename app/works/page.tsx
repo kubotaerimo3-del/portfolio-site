@@ -221,7 +221,7 @@ export default function WorksPage() {
   }, []);
 
   return (
-    <main className="min-h-screen text-slate-900 pt-20 md:pt-24">
+    <main className="min-h-screen text-slate-900 pt-20 md:pt-24 sp-text-left-all">
       <Header currentSection="works" enableSectionTracking={false} />
 
       <div className="max-w-5xl mx-auto px-[10%] md:px-6 py-10 md:py-16 space-y-12 md:space-y-16">
@@ -399,7 +399,7 @@ export default function WorksPage() {
                       {/* ▼ 名刺作品 */}
                       {work.type === "card" && (
                         <>
-                          <div className="flex justify-center gap-4">
+                          <div className="flex justify-center gap-3 md:gap-4 flex-wrap">
                             {[work.front, work.back].map((src, i) => (
                               <button
                                 key={i}
@@ -409,7 +409,9 @@ export default function WorksPage() {
                               >
                                 <div
                                   className="
-                                    w-[160px] md:w-[165px] aspect-square rounded-2xl overflow-hidden
+                                    w-[140px] sm:w-[160px] md:w-[165px]
+                                    aspect-[91/55]
+                                    rounded-2xl overflow-hidden
                                     bg-transparent
                                     shadow-lg shadow-black/5
                                     transition-all duration-200
@@ -422,7 +424,7 @@ export default function WorksPage() {
                                     alt={`${work.title} ${i === 0 ? "表" : "裏"}`}
                                     fill
                                     sizes="(min-width: 768px) 166px, 140px"
-                                    className="object-cover scale-[1.01]"
+                                    className="object-cover"
                                   />
                                 </div>
                               </button>

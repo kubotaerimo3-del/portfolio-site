@@ -44,7 +44,7 @@ const languageTools: Tool[] = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen text-slate-900 pt-20 md:pt-24">
+    <main className="min-h-screen text-slate-900 pt-20 md:pt-24 sp-text-left-all">
       <Header currentSection="about" enableSectionTracking={false} />
 
       {/* ★ 左右の余白を SP でも少し広めに（px-5） */}

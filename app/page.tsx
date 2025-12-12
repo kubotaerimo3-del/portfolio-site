@@ -93,7 +93,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen text-slate-900 pt-20 md:pt-24">
+    <main className="min-h-screen text-slate-900 pt-20 md:pt-24 sp-text-left-all">
       {/* 共通ヘッダー */}
       <Header />
 
@@ -168,7 +168,7 @@ export default function Home() {
                 {/* デザインしたもの */}
                 <PinkPillButton
                   className="w-[70%] max-w-xs sm:w-auto"
-                  onClick={() => scrollToSection("contact")}
+                  onClick={() => scrollToSection("works")}
                 >
                   デザインしたものを見る
                 </PinkPillButton>
