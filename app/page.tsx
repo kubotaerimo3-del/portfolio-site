@@ -304,40 +304,107 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ▼ ご依頼の流れ Section */}
       <section id="flow" className="py-12 md:py-16">
-        <div className="max-w-4xl mx-auto px-[10%] md:px-4 text-center sp-text-left-all">
+        <div className="max-w-5xl mx-auto px-[10%] md:px-4 text-center sp-text-left-all">
           <SectionTitle>ご依頼の流れ</SectionTitle>
 
-          <div className="mt-8 space-y-8 text-sm md:text-base text-slate-700 leading-relaxed">
+          <div className="mt-10 space-y-10 text-sm md:text-base text-slate-700 leading-relaxed">
 
-            <div>
-              <p className="font-bold text-pink-700">STEP 1｜お問い合わせ</p>
-              <p>まずはお気軽にご相談ください。ざっくりした内容でも大丈夫です。</p>
+            {/* STEP 1 */}
+            <div className="text-center">
+              <div
+                className="
+                  inline-flex items-center gap-2 
+                  rounded-full bg-[#ffeef9] border border-[#f3cfe6]
+                  px-4 py-1 
+                  text-xs md:text-sm font-semibold text-slate-800
+                  shadow-[0_4px_10px_rgba(0,0,0,0.04)]
+                "
+              >
+                STEP 1.  お問い合わせ
+              </div>
+              <p className="mt-3">
+                まずはお気軽にご相談ください。ざっくりした内容でも大丈夫です。
+              </p>
             </div>
 
-            <div>
-              <p className="font-bold text-pink-700">STEP 2｜ヒアリング</p>
-              <p>オンラインまたはメールで、目的やイメージを丁寧に伺います。</p>
+            {/* STEP 2 */}
+            <div className="text-center">
+              <div
+                className="
+                  inline-flex items-center gap-2 
+                  rounded-full bg-[#ffeef9] border border-[#f3cfe6]
+                  px-4 py-1 
+                  text-xs md:text-sm font-semibold text-slate-800
+                  shadow-[0_4px_10px_rgba(0,0,0,0.04)]
+                "
+              >
+                STEP 2.  ヒアリング
+              </div>
+              <p className="mt-3">
+                オンラインまたはメールで、目的やイメージを丁寧に伺います。
+              </p>
             </div>
 
-            <div>
-              <p className="font-bold text-pink-700">STEP 3｜ご提案・お見積り</p>
-              <p>構成案やお見積りをご提示し、ご納得いただければ制作へ進みます。</p>
+            {/* STEP 3 */}
+            <div className="text-center">
+              <div
+                className="
+                  inline-flex items-center gap-2 
+                  rounded-full bg-[#ffeef9] border border-[#f3cfe6]
+                  px-4 py-1 
+                  text-xs md:text-sm font-semibold text-slate-800
+                  shadow-[0_4px_10px_rgba(0,0,0,0.04)]
+                "
+              >
+                STEP 3.  ご提案・お見積り
+              </div>
+              <p className="mt-3">
+                構成案やお見積りをご提示し、ご納得いただければ制作へ進みます。
+              </p>
             </div>
 
-            <div>
-              <p className="font-bold text-pink-700">STEP 4｜デザイン制作・修正</p>
-              <p>目的に合ったデザインを制作し、必要に応じて修正も行います。</p>
+            {/* STEP 4 */}
+            <div className="text-center">
+              <div
+                className="
+                  inline-flex items-center gap-2 
+                  rounded-full bg-[#ffeef9] border border-[#f3cfe6]
+                  px-4 py-1 
+                  text-xs md:text-sm font-semibold text-slate-800
+                  shadow-[0_4px_10px_rgba(0,0,0,0.04)]
+                "
+              >
+                STEP 4.  デザイン制作・修正
+              </div>
+              <p className="mt-3">
+                目的に合わせてデザインを制作し、必要に応じて修正にも対応いたします。
+              </p>
             </div>
 
-            <div>
-              <p className="font-bold text-pink-700">STEP 5｜納品・振り返り</p>
-              <p>データを納品します。ご希望があれば運用のアドバイスも可能です。</p>
+            {/* STEP 5 */}
+            <div className="text-center">
+              <div
+                className="
+                  inline-flex items-center gap-2 
+                  rounded-full bg-[#ffeef9] border border-[#f3cfe6]
+                  px-4 py-1 
+                  text-xs md:text-sm font-semibold text-slate-800
+                  shadow-[0_4px_10px_rgba(0,0,0,0.04)]
+                "
+              >
+                STEP 5.  納品・振り返り
+              </div>
+              <p className="mt-3">
+                データを納品します。ご希望があれば運用面でのアドバイスも可能です。
+              </p>
             </div>
 
           </div>
         </div>
       </section>
+
 
       {/* ▼ お問い合わせ Section */}
       <section id="contact" className="mt-24 pb-16 md:pb-20">
