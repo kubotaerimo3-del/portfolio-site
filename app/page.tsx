@@ -130,8 +130,8 @@ export default function Home() {
               <p className="text-xs md:text-sm mb-3">
                 WEBデザイナー / 動画編集 / SNS運用
               </p>
-              <p className="text-[11px] md:text-sm text-pink-700 mb-4">
-                個人店・小さな企業さまの魅力を、やさしく届けるデザインを。
+              <p className="text-[11px] md:text-sm mb-4">
+                個人さま・企業さまの魅力を、やさしく届けるデザインを。
               </p>
 
 
